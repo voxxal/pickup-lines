@@ -1,16 +1,17 @@
 import tensorflow as tf
 
-import time;
+import time
 
 one_step_model = tf.saved_model.load('pickup_lines')
 start = time.time()
 states = None
-next_char = tf.constant(['Hey'])
+next_char = tf.constant([input("Enter some stuff: ")])
 result = [next_char]
 
 for n in range(1000):
-  next_char, states = one_step_model.generate_one_step(next_char, states=states)
-  result.append(next_char)
+    next_char, states = one_step_model.generate_one_step(
+        next_char, states=states)
+    result.append(next_char)
 
 result = tf.strings.join(result)
 end = time.time()
